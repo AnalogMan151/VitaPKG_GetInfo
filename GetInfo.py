@@ -3,7 +3,7 @@
 # Thanks to: mmozeiko & pkg2zip
 # Ver 1.4
 # Modified Date: 2018-03-19
-# Purpose: Obtains Title ID, Title, Region, Minimum Firmware, Content ID, and Size from PKG header.
+# Purpose: Obtains Type, Title ID, Title, Region, Minimum Firmware, Content ID, and Size from PKG header.
 # Usage: GetInfo.py http://...
 
 import sys
@@ -53,11 +53,9 @@ def GetSFO(header):
     content_type = 0
     sfo_offset = 0
     sfo_size = 0
-    items_offset = 0
-    items_size = 0
     total_size = get64be(header, 24)
 
-    for i in range(meta_count):
+    for _i in range(meta_count):
         ctype = get32be(header, meta_offset)
         size = get32be(header, meta_offset + 4)
 
@@ -77,7 +75,7 @@ def GetSFO(header):
     elif content_type == 0x1F:
         pkg_type = "VITA THEME"
     else:
-        print("\nERROR: PKG type not supported.\n".format(content_type))
+        print("\nERROR: PKG type not supported.\n")
         sys.exit(1)
     
     return header[sfo_offset:sfo_offset + sfo_size]
@@ -94,7 +92,7 @@ def ParseSFO(sfo):
     contentid = "Undefined"
     min_ver = 0.0
     titleid = "Undefined"
-    catagory = 0
+    category = 0
 
     for i in range(count):
         index_key = keys + get16le(sfo, i * 16 + 20)
