@@ -74,6 +74,8 @@ def GetSFO(header):
         pkg_type = "VITA APP"
     elif content_type == 0x16:
         pkg_type = "VITA DLC"
+    elif content_type == 0x1F:
+        pkg_type = "VITA THEME"
     else:
         print("\nERROR: PKG type not supported.\n".format(content_type))
         sys.exit(1)
