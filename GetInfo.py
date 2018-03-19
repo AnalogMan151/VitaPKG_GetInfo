@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Author: AnalogMan
 # Thanks to: mmozeiko & pkg2zip
-# Ver 1.3
+# Ver 1.4
 # Modified Date: 2018-03-19
 # Purpose: Obtains Title ID, Title, Region, Minimum Firmware, Content ID, and Size from PKG header.
 # Usage: GetInfo.py http://...
