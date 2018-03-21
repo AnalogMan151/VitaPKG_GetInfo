@@ -93,6 +93,7 @@ def ParseSFO(sfo):
     min_ver = 0.0
     titleid = "Undefined"
     category = 0
+    app_ver = 0.0
 
     for i in range(count):
         index_key = keys + get16le(sfo, i * 16 + 20)
@@ -116,8 +117,10 @@ def ParseSFO(sfo):
             min_ver = float(value.decode("utf-8"))
         elif key.decode("utf-8") == "CATEGORY":
             category = value
+        elif key.decode("utf-8") == "APP_VER":
+            app_ver = float(value.decode("utf-8"))
 
-    return titleid, title, min_ver, contentid, category
+    return titleid, title, min_ver, contentid, category, app_ver
 
 def main(argv):
     try:
@@ -134,7 +137,7 @@ def main(argv):
         print("Could not open URL")
         sys.exit(2)
     
-    titleid, title, min_ver, contentid, category = ParseSFO(GetSFO(header))
+    titleid, title, min_ver, contentid, category, app_ver = ParseSFO(GetSFO(header))
     region = GetRegion(contentid[0])
 
     global pkg_type
@@ -147,6 +150,7 @@ def main(argv):
     print("{:13} {}".format("Title:", title))
     print("{:13} {}".format("Region:", region))
     print("{:13} {}".format("Min FW:", min_ver))
+    print("{:13} {}".format("App Ver:", app_ver))
     print("{:13} {}".format("Content ID:", contentid))
     print("{:13} {}".format("Size:", total_size))
     print("{:13} {}".format("Pretty Size:", pretty_size(total_size)))
