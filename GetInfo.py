@@ -109,7 +109,7 @@ def ParseSFO(sfo):
                 break
             value.append(char)
         if key.decode("utf-8") == "TITLE":
-            title = value.decode("utf-8")
+            title = value.decode("utf-8").replace("\n", " ")
         elif key.decode("utf-8") == "CONTENT_ID":
             contentid = value.decode("utf-8")
             titleid = value.decode("utf-8")[7:16]
